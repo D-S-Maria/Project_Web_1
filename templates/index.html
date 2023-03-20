@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<meta charset="UTF-8">
+<h2 align="center">Предлагаемые поездки</h2>
+{% for jou in journey %}
+<h3>Предложение № {{ jou.id }}</h3>
+<div class="table_container">
+    <table class="my_table">
+        <tr class="my_row">
+            <td class="title" width="150px" bgcolor="#FDEED9">Страна поездки</td>
+            <td class="title" width="200px" bgcolor="#FDEED9">Кто предлагает</td>
+            <td class="title" width="150px" bgcolor="#FDEED9" align="center">Когда</td>
+            <td class="title" width="400px" bgcolor="#FDEED9" align="center">План поездки</td>
+            <td class="title" width="150px" bgcolor="#FDEED9" align="center">Как будем добираться</td>
+            <td class="title" width="150px" bgcolor="#FDEED9" align="center">email</td>
+            <td class="title" width="100px" bgcolor="#FDEED9" align="center">Откликнуться</td>
+        </tr>
+        <tr class="my_row">
+            <td class="ordinary" bgcolor="#DEF7FE">{{ jou.country.capitalize() }}</td>
+            <td class="ordinary" bgcolor="#DEF7FE">{{ names[jou.user_id][0] }} {{ names[jou.user_id][1] }}</td>
+            <td class="ordinary" bgcolor="#DEF7FE" align="center">{{ jou.month }}</td>
+            <td class="ordinary" bgcolor="#DEF7FE" align="center">{{ jou.about }}</td>
+            <td class="ordinary" bgcolor="#DEF7FE" align="center">{{ jou.transport }}</td>
+            <td class="ordinary" bgcolor="#DEF7FE"> {{ names[jou.user_id][2] }}</td>
+            <td class="ordinary" bgcolor="#DEF7FE" align="center"><a class="btn btn-success" href="/mail">написать</a></td>
+
+        </tr>
+
+    </table>
+</div>
+<br>
+{% endfor %}
+
+{% endblock %}
