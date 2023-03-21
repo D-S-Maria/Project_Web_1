@@ -4,12 +4,13 @@ from flask import Flask, render_template, redirect, request, make_response, json
 from flask_login import LoginManager, login_user, login_required, logout_user
 
 from data import db_session
+from data import user_api
 from data.add_journey import AddJourney
 from data.journey import Journey
 from data.login_form import LoginForm
+from data.mail_sender import send_email
 from data.register import RegisterForm
 from data.users import User
-from data.mail_sender import send_email
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -78,14 +79,14 @@ def reqister():
     return render_template('register.html', title='Регистрация', form=form)
 
 
-@app.route('/addjourney', methods=['GET', 'POST'])
-def addjourney():
+@app.route('/addjourney/<int:id>', methods=['GET', 'POST'])
+def addjourney(id=1):
     add_form = AddJourney()
     if add_form.validate_on_submit():
         db_sess = db_session.create_session()
         journey = Journey(
             country=add_form.country.data,
-            user_id=add_form.user_id.data,
+            user_id=id,
             month=add_form.month.data,
             about=add_form.about.data,
             transport=add_form.transport.data
@@ -102,7 +103,7 @@ def get_form():
 
 
 @app.route('/mail', methods=['POST'])
-def post_form():
+def post_form(email):
     email = request.values.get('email')
     text_msg = request.values.get('text_msg')
     if send_email(email, 'ответ на ваше предложение', text_msg=text_msg):
@@ -112,6 +113,7 @@ def post_form():
 
 def main():
     db_session.global_init("db/travel_prop.sqlite")
+    app.register_blueprint(user_api.blueprint)
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
 

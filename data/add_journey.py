@@ -1,13 +1,12 @@
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, StringField, BooleanField, IntegerField
+from wtforms import SubmitField, StringField
 from wtforms.validators import DataRequired
 
 
 class AddJourney(FlaskForm):
-    country = StringField('Country', validators=[DataRequired()])
-    user_id = IntegerField('User id', validators=[DataRequired()])
-    about = StringField('About', validators=[DataRequired()])
-    month = StringField('Month', validators=[DataRequired()])
-    transport = StringField('Transport', validators=[DataRequired()])
+    country = StringField('Страна', validators=[DataRequired()])
+    about = StringField('План путешествия', validators=[DataRequired()])
+    month = StringField('Планируемая дата', validators=[DataRequired()])
+    transport = StringField('Транспорт', validators=[DataRequired()])
 
-    submit = SubmitField('Submit')
+    submit = SubmitField('Предложить')

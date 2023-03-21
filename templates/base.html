@@ -21,7 +21,7 @@
             <a class="btn btn-success" href="/login">Вход</a>
         </p>
         {% endif %}
-        <a class="navbar-brand" href="/addjourney">Предложить поездку</a>
+        <a class="navbar-brand" href="/addjourney/{{ current_user.id }}">Предложить поездку</a>
     </nav>
     <h4>Путешествуй без границ!</h4>
 </header>

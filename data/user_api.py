@@ -1,8 +1,8 @@
 from flask import jsonify, Blueprint, request
 from werkzeug.security import generate_password_hash
 
-import db_session
-from users import User
+import data.db_session as db_session
+from data.users import User
 
 blueprint = Blueprint('user_api', __name__, template_folder='templates')
 
