@@ -9,7 +9,7 @@ from data.journey import Journey
 from data.login_form import LoginForm
 from data.register import RegisterForm
 from data.users import User
-from mail_sender import send_email
+from data.mail_sender import send_email
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
